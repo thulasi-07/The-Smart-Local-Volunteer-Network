@@ -2,7 +2,7 @@ import React from 'react';
 
 const EventCard = ({ event }) => {
   if (!event) {
-    return <p>Event not available</p>; // You can show a placeholder if event is not available
+    return <p>Event not available</p>; 
   }
 
   return (

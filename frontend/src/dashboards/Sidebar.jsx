@@ -2,7 +2,7 @@ import React from 'react';
 
 const Sidebar = ({ user }) => {
   if (!user) {
-    return <div>Loading...</div>; // or a fallback UI while the user data is not available
+    return <div>Loading...</div>; 
   }
 
   return (

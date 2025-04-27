@@ -43,7 +43,7 @@ const VolunteerDashboard = () => {
           </div>
         </div>
       </div>
-      {/* Pass user object correctly to Sidebar */}
+      
       <Sidebar user={user} />
     </div>
   );
