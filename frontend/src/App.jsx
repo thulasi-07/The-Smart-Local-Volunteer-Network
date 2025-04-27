@@ -9,6 +9,10 @@ import EventList from './forms/EventList';
 import VolunteerDashboard from './dashboards/VolunteerDashboard';
 import Sidebar from './dashboards/Sidebar';
 import EventCard from './dashboards/EventCard';
+import MyEventsPage from './pages/MyEventPage';
+import EventCards from './pages/EventCards';
+import FeedbackPage from './pages/FeedbackPage';
+import ActivityLog from './pages/ActivityLog';
 
 function App() {
   return (
@@ -23,6 +27,10 @@ function App() {
         <Route path="/volunteerdashboard" element={<VolunteerDashboard />} />
         <Route path="/sidebar" element={<Sidebar />} />
         <Route path="/eventcard" element={<EventCard />} />
+        <Route path="/myeventpage" element={<MyEventsPage />} />
+        <Route path="/eventcards" element={<EventCards />} />
+        <Route path="/feedbackpage" element={<FeedbackPage />} />
+        <Route path="/activitylog" element={<ActivityLog />} />
       </Routes>
     </Router>
   );
