@@ -6,10 +6,10 @@ export default function Profile() {
   const [editMode, setEditMode] = useState(false);
   const [formData, setFormData] = useState({});
 
-  // Simulate logged-in token (in real case, use localStorage or context)
+  
   const token = localStorage.getItem("token");
 
-  // Fetch the user profile from the API
+  
   useEffect(() => {
     const fetchProfile = async () => {
       try {
@@ -25,12 +25,12 @@ export default function Profile() {
     fetchProfile();
   }, [token]);
 
-  // Handle form field changes
+ 
   const handleChange = e => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  // Save the updated profile
+  
   const handleSave = async () => {
     try {
       await axios.put('http://localhost:5000/api/users/profile', formData, {

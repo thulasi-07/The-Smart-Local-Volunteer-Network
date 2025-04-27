@@ -5,7 +5,7 @@ import axios from 'axios';
 const HomePage = ({ user }) => {
   const [opportunities, setOpportunities] = useState([]);
 
-  // Fetch volunteer opportunities when the component is mounted
+ 
   useEffect(() => {
     if (user) {
       axios
@@ -23,7 +23,7 @@ const HomePage = ({ user }) => {
 
   return (
     <div className="bg-gradient-to-l from-indigo-600 via-purple-500 to-pink-500 min-h-screen text-white">
-      {/* Main Header Section */}
+      
       <header className="text-center py-16">
         <h1 className="text-5xl font-bold tracking-wide text-white mb-4">
           Welcome to the Smart Local Volunteer Network
@@ -31,7 +31,7 @@ const HomePage = ({ user }) => {
         <p className="text-xl font-medium text-white">Connect with local opportunities and make a positive impact in your community.</p>
       </header>
 
-      {/* Intro Section */}
+     
       <section className="px-6 py-12 max-w-5xl mx-auto text-center">
         <h2 className="text-3xl font-semibold text-white mb-6">
           Join us and help make the world a better place!
@@ -41,15 +41,15 @@ const HomePage = ({ user }) => {
         </p>
       </section>
 
-      {/* Conditional Rendering for User */}
+      
       {user ? (
         <>
-          {/* Personalized Section */}
+         
           <section className="bg-white text-gray-800 p-8 rounded-xl shadow-lg mx-8 mb-12">
             <h3 className="text-2xl font-semibold mb-6">Welcome back, {user.name}!</h3>
             <p className="text-lg text-gray-700 mb-6">Here are some volunteer opportunities that might interest you:</p>
 
-            {/* Opportunities List */}
+           
             <ul className="space-y-6">
               {opportunities.length > 0 ? (
                 opportunities.map((opp) => (
@@ -75,7 +75,7 @@ const HomePage = ({ user }) => {
         </>
       ) : (
         <>
-          {/* Call-to-Action Section */}
+         
           <section className="bg-white text-center p-8 rounded-xl shadow-lg mx-8 mb-12">
             <h3 className="text-2xl font-semibold mb-6">Not a volunteer yet?</h3>
             <p className="text-lg text-gray-700 mb-6">Join us today and start making an impact in your community!</p>
@@ -97,7 +97,7 @@ const HomePage = ({ user }) => {
         </>
       )}
 
-      {/* Footer Section */}
+      
       <footer className="bg-gray-800 text-white py-8 mt-12">
         <p className="text-center text-sm">© 2025 Smart Local Volunteer Network. All Rights Reserved.</p>
       </footer>
