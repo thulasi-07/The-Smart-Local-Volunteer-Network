@@ -13,10 +13,15 @@ import MyEventsPage from './pages/MyEventPage';
 import EventCards from './pages/EventCards';
 import FeedbackPage from './pages/FeedbackPage';
 import ActivityLog from './pages/ActivityLog';
+import BadgeCard from './pageandcards/BadgeCard';
+import LeaderboardPage from './pageandcards/LeaderboardPage';
+import AchievementsPage from './pageandcards/AchievementsPage';
+// import Navbar from './components/Navbar';
 
 function App() {
   return (
     <Router>
+      {/* <Navbar/> */}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<Register />} />
@@ -31,6 +36,9 @@ function App() {
         <Route path="/eventcards" element={<EventCards />} />
         <Route path="/feedbackpage" element={<FeedbackPage />} />
         <Route path="/activitylog" element={<ActivityLog />} />
+        <Route path="/badgecard" element={<BadgeCard />} />
+        <Route path="/leaderboardpage" element={<LeaderboardPage />} />
+        <Route path="/achievementspage" element={<AchievementsPage />} />
       </Routes>
     </Router>
   );
