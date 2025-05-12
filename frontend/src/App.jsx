@@ -1,28 +1,45 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import HomePage from './components/HomePage';
-import Register from './components/Register';
-import Login from './components/Login';
-import Profile from './components/Profile';
-import EventForm from './forms/EventForm';
-import EventList from './forms/EventList';
-import VolunteerDashboard from './dashboards/VolunteerDashboard';
-import Sidebar from './dashboards/Sidebar';
-import EventCard from './dashboards/EventCard';
-import MyEventsPage from './pages/MyEventPage';
-import EventCards from './pages/EventCards';
-import FeedbackPage from './pages/FeedbackPage';
-import ActivityLog from './pages/ActivityLog';
-import BadgeCard from './pageandcards/BadgeCard';
-import LeaderboardPage from './pageandcards/LeaderboardPage';
-import AchievementsPage from './pageandcards/AchievementsPage';
-// import Navbar from './components/Navbar';
+import Login from './modules/Auth/Login';
+import Register from './modules/Auth/Register';
+import Sidebar from './modules/Dashboard/Sidebar';
+import VolunteerDashboard from './modules/Dashboard/VolunteerDashboard';
+import EventCard from './modules/Events/EventCard';
+import EventForm from './modules/Events/EventForm';
+import EventList from './modules/Events/EventList';
+import ShareEvent.jsx from './modules/'
+
+import CertificatePage from "./modules/Participation/CertificatePage";
+
+
+
+
+// import HomePage from './components/HomePage';
+// import Register from './components/Register';
+// import Login from './components/Login';
+// import Profile from './components/Profile';
+// import EventForm from './forms/EventForm';
+// import EventList from './forms/EventList';
+// import VolunteerDashboard from './dashboards/VolunteerDashboard';
+// import Sidebar from './dashboards/Sidebar';
+// import EventCard from './dashboards/EventCard';
+// import MyEventsPage from './pages/MyEventPage';
+// import EventCards from './pages/EventCards';
+// import FeedbackPage from './pages/FeedbackPage';
+// import ActivityLog from './pages/ActivityLog';
+// import BadgeCard from './pageandcards/BadgeCard';
+// import LeaderboardPage from './pageandcards/LeaderboardPage';
+// import AchievementsPage from './pageandcards/AchievementsPage';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <Router>
-      {/* <Navbar/> */}
+      <Navbar/>
       <Routes>
+
+        <Route path="/certificate" element={<CertificatePage />} />
+
         <Route path="/" element={<HomePage />} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />

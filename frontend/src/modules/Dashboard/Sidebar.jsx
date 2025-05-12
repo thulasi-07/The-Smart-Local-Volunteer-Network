@@ -1,15 +1,22 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { FaHome, FaStar, FaClipboardList } from 'react-icons/fa';
 
-const Sidebar = ({ user }) => {
-  if (!user) {
-    return <div>Loading...</div>; 
-  }
-
+const Sidebar = () => {
   return (
-    <div className="sidebar p-6 bg-gray-100 rounded-lg shadow-md">
-      <h3 className="text-xl font-semibold">{user.name || 'Guest'}</h3>
-      <p className="text-gray-500">Location: {user.location || 'Unknown'}</p>
-      <p className="text-gray-500">Skills: {user.skills?.join(', ') || 'No skills specified'}</p>
+    <div className="bg-indigo-800 text-white min-h-screen w-60 p-6 space-y-6 fixed left-0 top-0">
+      <h2 className="text-2xl font-bold mb-4">Volunteer Panel</h2>
+      <nav className="flex flex-col space-y-4">
+        <NavLink to="/volunteer" className="hover:text-yellow-300 flex items-center gap-2">
+          <FaHome /> Dashboard
+        </NavLink>
+        <NavLink to="/myevents" className="hover:text-yellow-300 flex items-center gap-2">
+          <FaClipboardList /> My Events
+        </NavLink>
+        <NavLink to="/achievements" className="hover:text-yellow-300 flex items-center gap-2">
+          <FaStar /> Achievements
+        </NavLink>
+      </nav>
     </div>
   );
 };

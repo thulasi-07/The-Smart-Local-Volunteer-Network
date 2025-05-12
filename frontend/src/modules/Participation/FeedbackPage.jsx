@@ -1,45 +1,36 @@
 import React, { useState } from 'react';
-import { useParams } from 'react-router-dom'; 
 
 const FeedbackPage = () => {
-  const { eventId } = useParams();
-  const [rating, setRating] = useState(0);
-  const [comment, setComment] = useState('');
+  const [feedback, setFeedback] = useState('');
 
-  const handleSubmit = () => {
-    alert(`Feedback submitted for event ${eventId}: \nRating: ${rating} \nComment: ${comment}`);
+  const handleSubmit = e => {
+    e.preventDefault();
+    alert('Thank you for your feedback!');
+    setFeedback('');
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6">
-      <h2 className="text-3xl font-semibold mb-6 text-center">Give Feedback for Event {eventId}</h2>
-
-      <div className="rating mb-6 flex justify-center space-x-2">
-        <p className="text-lg">Rate the event:</p>
-        {[1, 2, 3, 4, 5].map((star) => (
-          <span
-            key={star}
-            onClick={() => setRating(star)}
-            className={`cursor-pointer text-2xl ${star <= rating ? 'text-yellow-500' : 'text-gray-400'}`}
-          >
-            ★
-          </span>
-        ))}
-      </div>
-
-      <textarea
-        placeholder="Leave a comment (optional)"
-        value={comment}
-        onChange={(e) => setComment(e.target.value)}
-        className="w-full p-4 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 mb-6"
-      />
-
-      <button
-        onClick={handleSubmit}
-        className="w-full py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600 transition duration-300"
+    <div className="min-h-screen flex justify-center items-center bg-gray-100 p-4">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white p-8 rounded-lg shadow-md w-full max-w-xl space-y-6"
       >
-        Submit Feedback
-      </button>
+        <h2 className="text-2xl font-bold text-indigo-700">Event Feedback 💬</h2>
+        <textarea
+          className="w-full border border-gray-300 rounded-md p-4 focus:outline-indigo-500"
+          rows={6}
+          placeholder="Share your experience..."
+          value={feedback}
+          onChange={e => setFeedback(e.target.value)}
+          required
+        />
+        <button
+          type="submit"
+          className="bg-indigo-600 hover:bg-indigo-700 text-white py-2 px-6 rounded-md"
+        >
+          Submit Feedback
+        </button>
+      </form>
     </div>
   );
 };

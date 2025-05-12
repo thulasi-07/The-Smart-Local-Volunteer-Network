@@ -1,42 +1,36 @@
 import React from 'react';
 
+const leaders = [
+  { id: 1, name: 'Asha R.', points: 980 },
+  { id: 2, name: 'Manoj T.', points: 870 },
+  { id: 3, name: 'Thulasi K.', points: 820 },
+];
+
 const LeaderboardPage = () => {
-  const leaderboardData = [
-    { rank: 1, name: 'Thulasi', hours: 95 },
-    { rank: 2, name: 'Ajay', hours: 87 },
-    { rank: 3, name: 'Riya', hours: 80 },
-    { rank: 4, name: 'Ankit', hours: 76 },
-  ];
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-800 to-indigo-900 py-12 px-6 text-white">
-      <h2 className="text-3xl md:text-4xl font-bold text-center mb-10">🏆 Volunteer Leaderboard</h2>
-
-      <div className="overflow-x-auto max-w-4xl mx-auto">
-        <table className="w-full table-auto border-collapse rounded-lg shadow-md overflow-hidden bg-white/10 backdrop-blur-md text-white">
-          <thead>
-            <tr className="bg-purple-700 text-left text-sm uppercase">
-              <th className="px-6 py-4">Rank</th>
-              <th className="px-6 py-4">Name</th>
-              <th className="px-6 py-4">Hours Volunteered</th>
+    <div className="p-8 min-h-screen bg-white">
+      <h2 className="text-3xl font-bold text-indigo-700 mb-6">Leaderboard 🥇</h2>
+      <table className="w-full bg-gray-50 rounded-lg shadow-md overflow-hidden">
+        <thead className="bg-indigo-100 text-indigo-700">
+          <tr>
+            <th className="py-3 px-6 text-left">Rank</th>
+            <th className="py-3 px-6 text-left">Name</th>
+            <th className="py-3 px-6 text-left">Points</th>
+          </tr>
+        </thead>
+        <tbody>
+          {leaders.map((leader, index) => (
+            <tr
+              key={leader.id}
+              className={`border-t ${index % 2 === 0 ? 'bg-white' : 'bg-gray-100'}`}
+            >
+              <td className="py-3 px-6">{index + 1}</td>
+              <td className="py-3 px-6 font-semibold">{leader.name}</td>
+              <td className="py-3 px-6">{leader.points}</td>
             </tr>
-          </thead>
-          <tbody>
-            {leaderboardData.map((user, index) => (
-              <tr
-                key={index}
-                className={`${
-                  index % 2 === 0 ? 'bg-white/5' : 'bg-white/10'
-                } hover:bg-purple-600 transition-colors`}
-              >
-                <td className="px-6 py-4 font-semibold">{user.rank}</td>
-                <td className="px-6 py-4">{user.name}</td>
-                <td className="px-6 py-4">{user.hours}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

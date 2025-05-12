@@ -1,21 +1,26 @@
 import React from 'react';
 
-const ActivityLog = ({ events = [] }) => {  
-  return (
-    <div className="max-w-4xl mx-auto p-6">
-      <h3 className="text-3xl font-semibold mb-6 text-center">Activity Log</h3>
+const activities = [
+  { id: 1, event: 'Beach Cleanup', date: '2025-04-10', status: 'Completed' },
+  { id: 2, event: 'Park Maintenance', date: '2025-04-25', status: 'Completed' },
+];
 
-      <div className="timeline space-y-6">
-        {events.map((event, index) => (
-          <div key={index} className="timeline-item flex items-start">
-            <div className="timeline-dot w-4 h-4 bg-blue-500 rounded-full mr-4 mt-1"></div>
-            <div className="timeline-content">
-              <h4 className="text-lg font-semibold">{event.title}</h4>
-              <p className="text-sm text-gray-600">{event.date} - <span className="text-gray-900">{event.status}</span></p>
-            </div>
-          </div>
+const ActivityLog = () => {
+  return (
+    <div className="p-8 bg-white min-h-screen">
+      <h2 className="text-2xl font-bold text-indigo-600 mb-6">My Activity Log 📚</h2>
+      <ul className="space-y-4">
+        {activities.map(log => (
+          <li
+            key={log.id}
+            className="border p-4 rounded-md shadow-sm bg-gray-50 hover:bg-gray-100"
+          >
+            <h3 className="font-semibold">{log.event}</h3>
+            <p>Date: {log.date}</p>
+            <p>Status: <span className="text-green-600">{log.status}</span></p>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };

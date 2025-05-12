@@ -1,127 +1,74 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 const EventForm = () => {
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [date, setDate] = useState('');
-  const [time, setTime] = useState('');
-  const [skillsNeeded, setSkillsNeeded] = useState('');
-  const [numVolunteers, setNumVolunteers] = useState('');
-  const [location, setLocation] = useState('');
+  const [eventData, setEventData] = useState({
+    title: '',
+    description: '',
+    location: '',
+    date: '',
+  });
 
-  const handleSubmit = async (e) => {
+  const handleChange = (e) => {
+    setEventData({ ...eventData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const eventData = {
-      title,
-      description,
-      date,
-      time,
-      skillsNeeded: skillsNeeded.split(','),
-      numVolunteers,
-      location,
-    };
-
-    try {
-      await axios.post('http://localhost:5000/api/events/create', eventData);
-      alert('Event Created Successfully!');
-    } catch (err) {
-      console.error('Error creating event:', err);
-      alert('Failed to create event');
-    }
+    console.log('Event Created:', eventData);
+   
   };
 
   return (
-    <div className="event-form bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-8 min-h-screen">
-      <div className="max-w-2xl mx-auto bg-white rounded-lg shadow-lg p-8">
-        <h2 className="text-3xl font-semibold text-center text-gray-800 mb-6">Create Volunteer Event</h2>
-        <form onSubmit={handleSubmit}>
-          <div className="mb-4">
-            <label className="block text-gray-700 font-semibold mb-2">Event Title</label>
-            <input
-              type="text"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-              className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-gray-700 font-semibold mb-2">Description</label>
-            <textarea
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              required
-              className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            ></textarea>
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-gray-700 font-semibold mb-2">Date</label>
-            <input
-              type="date"
-              value={date}
-              onChange={(e) => setDate(e.target.value)}
-              required
-              className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-gray-700 font-semibold mb-2">Time</label>
-            <input
-              type="time"
-              value={time}
-              onChange={(e) => setTime(e.target.value)}
-              required
-              className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-gray-700 font-semibold mb-2">Required Skills (comma-separated)</label>
-            <input
-              type="text"
-              value={skillsNeeded}
-              onChange={(e) => setSkillsNeeded(e.target.value)}
-              required
-              className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-gray-700 font-semibold mb-2">Number of Volunteers</label>
-            <input
-              type="number"
-              value={numVolunteers}
-              onChange={(e) => setNumVolunteers(e.target.value)}
-              required
-              className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            />
-          </div>
-
-          <div className="mb-4">
-            <label className="block text-gray-700 font-semibold mb-2">Location</label>
-            <input
-              type="text"
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              required
-              className="w-full p-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-            />
-          </div>
-
-          <div className="text-center">
-            <button
-              type="submit"
-              className="w-full p-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none"
-            >
-              Create Event
-            </button>
-          </div>
-        </form>
-      </div>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-400 to-purple-500 flex items-center justify-center p-6">
+      <form
+        onSubmit={handleSubmit}
+        className="bg-white shadow-xl rounded-xl p-8 w-full max-w-lg space-y-4"
+      >
+        <h2 className="text-2xl font-bold text-purple-700 text-center mb-4">
+          Create an Event
+        </h2>
+        <input
+          name="title"
+          type="text"
+          placeholder="Event Title"
+          value={eventData.title}
+          onChange={handleChange}
+          className="w-full border px-4 py-2 rounded-lg"
+          required
+        />
+        <textarea
+          name="description"
+          placeholder="Description"
+          value={eventData.description}
+          onChange={handleChange}
+          className="w-full border px-4 py-2 rounded-lg"
+          rows="3"
+          required
+        />
+        <input
+          name="location"
+          type="text"
+          placeholder="Location"
+          value={eventData.location}
+          onChange={handleChange}
+          className="w-full border px-4 py-2 rounded-lg"
+          required
+        />
+        <input
+          name="date"
+          type="date"
+          value={eventData.date}
+          onChange={handleChange}
+          className="w-full border px-4 py-2 rounded-lg"
+          required
+        />
+        <button
+          type="submit"
+          className="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700"
+        >
+          Create Event
+        </button>
+      </form>
     </div>
   );
 };
