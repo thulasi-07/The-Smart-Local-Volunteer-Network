@@ -34,3 +34,66 @@
 // };
 
 // export default Navbar;
+
+import React from "react";
+import { Link, useLocation } from "react-router-dom";
+
+const Navbar = () => {
+  const location = useLocation();
+
+  const isAuthPage = location.pathname === "/login" || location.pathname === "/register";
+
+  if (isAuthPage) return null; 
+
+  return (
+    <nav className="bg-white shadow-md fixed w-full z-10">
+      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <Link to="/home" className="text-2xl font-bold text-indigo-600">
+          SmartVolunteer
+        </Link>
+
+        <div className="flex items-center space-x-6">
+          <Link
+            to="/dashboard"
+            className="text-gray-600 hover:text-indigo-600 transition font-medium"
+          >
+            Dashboard
+          </Link>
+          <Link
+            to="/events"
+            className="text-gray-600 hover:text-indigo-600 transition font-medium"
+          >
+            Events
+          </Link>
+          <Link
+            to="/achievements"
+            className="text-gray-600 hover:text-indigo-600 transition font-medium"
+          >
+            Achievements
+          </Link>
+          <Link
+            to="/leaderboard"
+            className="text-gray-600 hover:text-indigo-600 transition font-medium"
+          >
+            Leaderboard
+          </Link>
+          <Link
+            to="/profile"
+            className="text-gray-600 hover:text-indigo-600 transition font-medium"
+          >
+            Profile
+          </Link>
+          <Link
+            to="/login"
+            className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition"
+          >
+            Logout
+          </Link>
+        </div>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
+

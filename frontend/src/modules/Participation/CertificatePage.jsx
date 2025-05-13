@@ -1,47 +1,61 @@
-import React, { useRef } from "react";
-import html2pdf from "html2pdf.js";
+import React, { useState } from "react";
+import axios from "axios";
 
-const CertificatePage = ({ name = "Thulasi K.", eventName = "Beach Cleanup", date = "May 10, 2025" }) => {
-  const certificateRef = useRef();
+const CertificatePage = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    event: "",
+  });
 
-  const handleDownload = () => {
-    const element = certificateRef.current;
-    const opt = {
-      margin:       0.5,
-      filename:     `${name.replace(" ", "_")}_Certificate.pdf`,
-      image:        { type: 'jpeg', quality: 0.98 },
-      html2canvas:  { scale: 2 },
-      jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-    };
-    html2pdf().set(opt).from(element).save();
+  const handleDownload = async () => {
+    try {
+      const res = await axios.post(
+        "http://localhost:5000/api/generate-certificate",
+        formData,
+        { responseType: "blob" } 
+      );
+
+      const url = window.URL.createObjectURL(new Blob([res.data]));
+      const link = document.createElement("a");
+      link.href = url;
+      link.setAttribute("download", `${formData.name}-certificate.pdf`);
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+    } catch (error) {
+      console.log("Error generating certificate", error);
+    }
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-6">
-      <div ref={certificateRef} className="bg-white border-4 border-indigo-500 p-10 w-full max-w-3xl text-center shadow-lg rounded-lg">
-        <h1 className="text-3xl font-bold text-indigo-700 mb-6">Certificate of Participation</h1>
-        <p className="text-lg mb-4">
-          This is to certify that <span className="font-semibold text-indigo-600">{name}</span>
-        </p>
-        <p className="text-lg mb-4">
-          has successfully participated in the event <span className="font-semibold text-indigo-600">"{eventName}"</span>
-        </p>
-        <p className="text-lg mb-4">
-          held on <span className="font-semibold text-indigo-600">{date}</span>.
-        </p>
-        <p className="mt-10 text-sm text-gray-500">Smart Local Volunteer Network</p>
-        <div className="mt-10 text-right pr-10">
-          <p className="text-sm">_____________________</p>
-          <p className="text-sm">Authorized Signature</p>
-        </div>
-      </div>
+    <div className="min-h-screen bg-blue-50 flex items-center justify-center px-4">
+      <div className="bg-white shadow-lg rounded-lg p-8 max-w-md w-full">
+        <h2 className="text-xl font-bold text-blue-600 mb-6 text-center">
+          Download Your Certificate
+        </h2>
 
-      <button 
-        onClick={handleDownload}
-        className="mt-8 px-6 py-3 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition"
-      >
-        Download Certificate
-      </button>
+        <input
+          type="text"
+          placeholder="Enter your name"
+          className="w-full border px-4 py-2 mb-4 rounded"
+          value={formData.name}
+          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+        />
+        <input
+          type="text"
+          placeholder="Event name"
+          className="w-full border px-4 py-2 mb-6 rounded"
+          value={formData.event}
+          onChange={(e) => setFormData({ ...formData, event: e.target.value })}
+        />
+
+        <button
+          onClick={handleDownload}
+          className="bg-blue-600 hover:bg-blue-700 text-white w-full py-2 rounded transition"
+        >
+          Download Certificate
+        </button>
+      </div>
     </div>
   );
 };

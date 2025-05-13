@@ -8,7 +8,7 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-blue-400 to-indigo-600 flex flex-col items-center justify-center p-4 text-white">
-      <h1 className="text-4xl font-bold mb-4">Welcome, {user?.name || 'Guest'} 👋</h1>
+       <h1 className="text-2xl font-bold">Welcome {user ? user.name : "Guest"}!</h1>
       <p className="text-lg mb-6">You're logged in as a <span className="font-semibold capitalize">{user?.role}</span></p>
 
       <div className="space-x-4">

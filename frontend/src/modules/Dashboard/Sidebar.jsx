@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import { FaHome, FaStar, FaClipboardList } from 'react-icons/fa';
 
+
 const Sidebar = () => {
   return (
     <div className="bg-indigo-800 text-white min-h-screen w-60 p-6 space-y-6 fixed left-0 top-0">

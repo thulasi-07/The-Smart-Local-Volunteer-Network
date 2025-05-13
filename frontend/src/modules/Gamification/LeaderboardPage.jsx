@@ -1,36 +1,41 @@
-import React from 'react';
-
-const leaders = [
-  { id: 1, name: 'Asha R.', points: 980 },
-  { id: 2, name: 'Manoj T.', points: 870 },
-  { id: 3, name: 'Thulasi K.', points: 820 },
-];
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 const LeaderboardPage = () => {
+  const [leaders, setLeaders] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:5000/api/leaderboard")
+      .then(res => setLeaders(res.data))
+      .catch(err => console.error("Error fetching leaderboard", err));
+  }, []);
+
   return (
-    <div className="p-8 min-h-screen bg-white">
-      <h2 className="text-3xl font-bold text-indigo-700 mb-6">Leaderboard 🥇</h2>
-      <table className="w-full bg-gray-50 rounded-lg shadow-md overflow-hidden">
-        <thead className="bg-indigo-100 text-indigo-700">
-          <tr>
-            <th className="py-3 px-6 text-left">Rank</th>
-            <th className="py-3 px-6 text-left">Name</th>
-            <th className="py-3 px-6 text-left">Points</th>
-          </tr>
-        </thead>
-        <tbody>
-          {leaders.map((leader, index) => (
-            <tr
-              key={leader.id}
-              className={`border-t ${index % 2 === 0 ? 'bg-white' : 'bg-gray-100'}`}
-            >
-              <td className="py-3 px-6">{index + 1}</td>
-              <td className="py-3 px-6 font-semibold">{leader.name}</td>
-              <td className="py-3 px-6">{leader.points}</td>
+    <div className="min-h-screen bg-white py-10 px-6">
+      <h2 className="text-3xl font-bold text-center text-purple-600 mb-8">🏆 Leaderboard</h2>
+
+      <div className="max-w-3xl mx-auto">
+        <table className="w-full table-auto border-collapse shadow-md">
+          <thead>
+            <tr className="bg-purple-100 text-left">
+              <th className="p-3">Rank</th>
+              <th className="p-3">Name</th>
+              <th className="p-3">Events</th>
+              <th className="p-3">Points</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {leaders.map((user, index) => (
+              <tr key={index} className="border-t hover:bg-purple-50 transition">
+                <td className="p-3 font-semibold">{index + 1}</td>
+                <td className="p-3">{user.name}</td>
+                <td className="p-3">{user.eventsCompleted}</td>
+                <td className="p-3">{user.points}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 };
